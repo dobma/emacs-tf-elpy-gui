@@ -1,0 +1,74 @@
+;;
+;;dobma's setting
+;;
+;;full-screen
+;;(toggle-frame-fullscreen)
+;;basic setting
+(setq user-full-name "DobMa")
+(setq user-mail-address "dobmalinux@gmail.com")
+(setq tab-width 4)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+(setq next-line-add-newlines t)
+(transient-mark-mode t)
+(global-linum-mode t)
+(line-number-mode 0)
+(column-number-mode t)
+(desktop-read)
+(setq inhibit-startup-message t)
+(setq show-paren-mode t)
+(mouse-avoidance-mode 'animate)
+(setq search-exit-option t)
+(setq-default case-fold-search t)
+(setq search-highlight t)
+(setq query-replace-highlight t)
+(electric-pair-mode t);;auto insert pair parentheses
+;;iswitchb C-x b,quickly switch buffer
+(iswitchb-mode t)
+;;show parenthesis
+(show-paren-mode t)
+(setq show-paren-mode t)
+(setq show-paren-style 'parenthesis)
+;;
+;;set the custom key
+;;
+(global-set-key[(meta g)]'goto-line);;set go to line key
+(global-set-key[(meta n)]'other-window);;set other-window key
+(global-set-key (kbd "C-c c") 'comment-or-uncomment-region);;set comment key
+;;
+;;MELPA's setting
+;;
+(require 'package) ;; You might already have this line
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+  (add-to-list 'package-archives (cons "melpa" url) t))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize) ;; You might already have this line
+;;use the stable package repository
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;;run M-x package-refresh-contents or M-x package-list-packages
+;;to ensure that Emacs has fetched the MELPA package list
+;;before you can install packages with M-x package-install or similar.
+;;
+;;theme in MELPA
+;;
+(load-theme 'calmer-forest t)
+;;
+;;input method setting in MELPA
+;;
+(require 'pyim)
+(require 'pyim-basedict);;ciku setting
+(pyim-basedict-enable);;ciku enable
+(setq pyim-default-scheme 'quanpin);;quanpin enable
+(setq default-input-method "pyim");;pyim enable
+(put 'narrow-to-region 'disabled nil)
+;;
+;Python Setting
+;;
+;set up elpy in MELPA
+(elpy-enable)
